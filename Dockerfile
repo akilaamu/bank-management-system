@@ -1,6 +1,12 @@
+FROM openjdk:17-jdk-slim
 
-FROM openjdk:11-jre-slim
 WORKDIR /app
-COPY target/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+
+# Copy all source files
+COPY . .
+
+# Compile Java files with package support
+RUN javac -d . *.java
+
+# Run the main class (with package name)
+CMD ["java", "BankManagementSystem.Login"]
